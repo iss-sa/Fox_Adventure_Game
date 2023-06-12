@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private float _moveSpeed; 
     private float _runSpeed = 10f;
     private float _walkSpeed = 3f;
-    private float _jumpingSpeed = 2f;
+    private float _jumpingSpeed = 3f;
     private int _maxJumps = 2; // only double jumps possible, not triple
     private int _jumpsRemaining; 
     private bool _isJumping = false;
@@ -21,6 +21,10 @@ public class Player : MonoBehaviour
         _moveSpeed = Input.GetKey(KeyCode.LeftShift) ? _runSpeed : _walkSpeed;
 
         MovementPlayer();
+
+
+        if (Input.GetMouseButtonDown(0)) //right click on mouse
+        {}
     }
 
     private void MovementPlayer()

@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 721221191242212113}
   - component: {fileID: 721221191242212112}
-  - component: {fileID: 721221191242212115}
-  - component: {fileID: 721221191242212114}
   - component: {fileID: 721221191242212116}
   m_Layer: 0
   m_Name: Player
@@ -49,33 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RB: {fileID: 721221191242212116}
---- !u!114 &721221191242212115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721221191242212142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d8e22c9aa1ec654f939d346a351fb27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemToCollect: {fileID: 0}
-  inventory: {fileID: 0}
---- !u!114 &721221191242212114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721221191242212142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a76b9f49bf290fc4698f088211c62358, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectedGameObjects: []
 --- !u!54 &721221191242212116
 Rigidbody:
   m_ObjectHideFlags: 0
