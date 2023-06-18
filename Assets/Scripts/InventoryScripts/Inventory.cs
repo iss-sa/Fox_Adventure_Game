@@ -9,6 +9,8 @@ public class Inventory : MonoBehaviour
     public ItemDatabase itemDatabase; // reference to database to drag and drop from inspector
     public UIInventory inventoryUI; //grab reference to UI Inventory for methods
 
+    //private bool _itemCollision = false; // true if player collided with an item
+
     private void Start()
     {
         inventoryUI.gameObject.SetActive(!inventoryUI.gameObject.activeSelf);
@@ -20,6 +22,12 @@ public class Inventory : MonoBehaviour
         {
             inventoryUI.gameObject.SetActive(!inventoryUI.gameObject.activeSelf);
         }
+
+        //if (_itemCollision && Input.GetKeyDown(KeyCode.E))
+        //{
+        //    GiveItem(_itemName);
+            
+        //}
     }
 
     // give Player new item
@@ -36,9 +44,9 @@ public class Inventory : MonoBehaviour
         Item itemToAdd = itemDatabase.GetItem(itemName);
         characterItems.Add(itemToAdd);
         inventoryUI.AddNewItem(itemToAdd); //using UI Inventory method
-        Debug.Log("Added item: " + itemToAdd.title); 
-
+        Debug.Log("Added item: " + itemToAdd.title);
     }
+
     //check for item in list/inventory
     public Item CheckForItem(int id)
     {
@@ -71,34 +79,29 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        // Check if the collider belongs to the item being collected
-        if (other.CompareTag("Box"))
-        {
-            GiveItem("Box");
-            Destroy(other.gameObject);
-        }
+        // Check if the collider belongs to the item being collected -> can only be picked up if key 'E' pressed
 
-        if (other.CompareTag("Rock")) // Rock item found -> add to inventory
+        if (other.CompareTag("Rock") && Input.GetKeyDown(KeyCode.E)) // Rock item found -> add to inventory
         {
             GiveItem("Rock");
             Destroy(other.gameObject);
         }
 
-        if (other.CompareTag("Branch")) // Branch item found -> add to inventory
+        if (other.CompareTag("Branch") && Input.GetKeyDown(KeyCode.E)) // Branch item found -> add to inventory
         {
             GiveItem("Branch");
             Destroy(other.gameObject);
         }
 
-        if (other.CompareTag("Food")) // Food item found -> add to inventory
+        if (other.CompareTag("Food") && Input.GetKeyDown(KeyCode.E)) // Food item found -> add to inventory
         {
             GiveItem("Food");
             Destroy(other.gameObject);
         }
 
-        if (other.CompareTag("Leaves")) // Leaves item found -> add to inventory
+        if (other.CompareTag("Leaves") && Input.GetKeyDown(KeyCode.E)) // Leaves item found -> add to inventory
         {
             GiveItem("Leaves");
             Destroy(other.gameObject);
