@@ -8,16 +8,14 @@ public class Item
     public string title;
     public string description;
     public Sprite icon;
-    public Dictionary<string, int> stats = new Dictionary<string, int>(); // to get stats of items
 
     // constructor
-    public Item(int id, string title, string description, Dictionary<string, int> stats)
+    public Item(int id, string title, string description)
     {
         this.id = id;
         this.title = title;
         this.description = description;
         this.icon = Resources.Load<Sprite>("Sprites/Items/" + title);
-        this.stats = stats;
     }
 
     // constructor where we grab an item and copy all of it
@@ -27,6 +25,5 @@ public class Item
         this.title = title;
         this.description = description;
         this.icon = Resources.Load<Sprite>("Sprites/Items/" + title);
-        this.stats = stats;
     }
 }

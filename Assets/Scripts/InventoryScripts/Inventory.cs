@@ -9,6 +9,10 @@ public class Inventory : MonoBehaviour
     public ItemDatabase itemDatabase; // reference to database to drag and drop from inspector
     public UIInventory inventoryUI; //grab reference to UI Inventory for methods
 
+    private void Start()
+    {
+        inventoryUI.gameObject.SetActive(!inventoryUI.gameObject.activeSelf);
+    }
     // to toggle inventory or call it
     private void Update()
     {
@@ -40,6 +44,21 @@ public class Inventory : MonoBehaviour
     {
         return characterItems.Find(item => item.id == id);
     }
+
+    // to return an item name if in inventory
+    public string FindItemInInventory(int id)
+    {
+        Item _toFind = CheckForItem(id);
+        if (_toFind != null)
+        {
+            return _toFind.title;
+        }
+        else
+        {
+            return "none";
+        }
+    }
+
     //remove item from inventory
     public void RemoveItem(int id)
     {
@@ -58,6 +77,30 @@ public class Inventory : MonoBehaviour
         if (other.CompareTag("Box"))
         {
             GiveItem("Box");
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("Rock")) // Rock item found -> add to inventory
+        {
+            GiveItem("Rock");
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("Branch")) // Branch item found -> add to inventory
+        {
+            GiveItem("Branch");
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("Food")) // Food item found -> add to inventory
+        {
+            GiveItem("Food");
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("Leaves")) // Leaves item found -> add to inventory
+        {
+            GiveItem("Leaves");
             Destroy(other.gameObject);
         }
     }
