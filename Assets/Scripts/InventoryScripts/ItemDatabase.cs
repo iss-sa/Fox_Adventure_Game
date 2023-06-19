@@ -26,7 +26,6 @@ public class ItemDatabase : MonoBehaviour
     void BuildDatabase()
     {
         items = new List<Item>() {
-                new Item(0, "Box", "A magical Box"),
                 new Item(1, "Branch", "A nice ranch to help you climb the mountain"),
                 new Item(2, "Leaves", "For a tent and a sleeping place? yes please :)"),
                 new Item(3, "Rock", "If you can carry this rock, you are impressively strong!"),
