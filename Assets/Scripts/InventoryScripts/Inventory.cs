@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     // hold list of items called collectorItems
-    public List<Item> characterItems = new List<Item>();
+    public List<Item> characterItems = new List<Item>(); // list of all character Items
     public ItemDatabase itemDatabase; // reference to database to drag and drop from inspector
     public UIInventory inventoryUI; //grab reference to UI Inventory for methods
 
@@ -22,12 +22,6 @@ public class Inventory : MonoBehaviour
         {
             inventoryUI.gameObject.SetActive(!inventoryUI.gameObject.activeSelf);
         }
-
-        //if (_itemCollision && Input.GetKeyDown(KeyCode.E))
-        //{
-        //    GiveItem(_itemName);
-            
-        //}
     }
 
     // give Player new item

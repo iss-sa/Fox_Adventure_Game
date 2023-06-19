@@ -12,6 +12,14 @@ public class LevelChange : MonoBehaviour
     private Animator _transition;
     private float _transitionTime = 1f;
 
+    // --- variables to count how often an item is in the inventory of the player
+    private int _food = 0;
+    private int _rocks = 0;
+    private int _branches = 0;
+    private int _leaves = 0;
+    // ---
+
+    // if player collides with the LevelChanger Object, it is checked if required Items are in inventory 
     private void OnTriggerEnter(Collider other)
     {   
         if (other.CompareTag("Player"))
@@ -56,6 +64,25 @@ public class LevelChange : MonoBehaviour
             } 
 
             // to finish level4: Branch, Leaves, Rock, Food needed for a camping place
+            if (SceneManager.GetActiveScene().buildIndex == 4)
+            {
+                // go through inventory (public List<Item> characterItems = new List<Item>();) and 
+                // if food / rock / branch / leaves found:  add 1 to respective variable
+                    // if(_inventory.FindItemInInventory(1) == "Branch") {_branches += 1} 
+                    // if(_inventory.FindItemInInventory(2) == "Leaves") {_leaves += 1} 
+                    // if(_inventory.FindItemInInventory(3) == "Rock") {_rocks += 1} 
+                    // if(_inventory.FindItemInInventory(4) == "Food") {_food += 1} 
+                
+
+                if(_food == 2 && _rocks == 5 && _branches == 6 && _leaves == 4)
+                {
+                    LoadNextLevel();
+                }
+                else
+                {
+                    Debug.Log("You are still missing some items to be able to build an awesome camp");
+                }
+            }
         }
     } 
 
