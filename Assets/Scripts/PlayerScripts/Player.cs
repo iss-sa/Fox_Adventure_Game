@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private Rigidbody RB;
+    [SerializeField] private Transform _camera;
     private float _moveSpeed; 
     private float _runSpeed = 10f;
     private float _walkSpeed = 3f;
@@ -29,26 +30,29 @@ public class Player : MonoBehaviour
 
     private void MovementPlayer()
     {
-        Vector3 inputDirection = new Vector3(0,0,0); //movement direction through inputs
-        // forward and backward --> ANIMATION TECHNICALLY HANDLES MOVEMENT
-        if(Input.GetKey(KeyCode.W))
-        {
-            inputDirection.z = +1;
-        }
-        if(Input.GetKey(KeyCode.S))
-        {
-            inputDirection.z = -1;
-        }
-        // left and right
-        if(Input.GetKey(KeyCode.A))
-        {
-            inputDirection.x = -1;
-        }
-        if(Input.GetKey(KeyCode.D))
-        {
-            inputDirection.x = +1;
-        }
-        // Jump
+        // Player Input - forward/back and left/right 
+        float _horizontalInput = Input.GetAxis("Horizontal");
+        float _verticalInput = Input.GetAxis("Vertical");
+
+        // Camera direction
+        Vector3 _cameraForward = _camera.forward;
+        Vector3 _cameraRight = _camera.right;
+        // so that player doesn't move upwards/downwards when camera is facing up/down
+        _cameraForward.y = 0; 
+        _cameraRight.y = 0;
+        _cameraForward = _cameraForward.normalized;
+        _cameraRight = _cameraRight.normalized;
+
+        // Direction-Relative Input Vectors
+        Vector3 _forwardRelativeVerticalInput = _verticalInput * _cameraForward;
+        Vector3 _rightRelativeVerticalInput = _horizontalInput * _cameraRight;
+        
+        // Camera-Relative Movement of Player
+        Vector3 _moveDir = _forwardRelativeVerticalInput + _rightRelativeVerticalInput;
+
+
+        Vector3 inputDirection = new Vector3(0,0,0); //movement direction through inputs (only jumping)
+        // Jump and double jump
         if(Input.GetKeyDown("space"))
         {
             // if you have not done a double jump
@@ -73,20 +77,20 @@ public class Player : MonoBehaviour
 
         // normalize, so that diagonal movement not faster
         inputDirection = inputDirection.normalized;
+        _moveDir.y = inputDirection.y;
 
         // apply movement
-        transform.position += inputDirection * _moveSpeed * Time.deltaTime;
+        transform.position += _moveDir * _moveSpeed * Time.deltaTime;
 
         // ROTATION of player -> smoothness of rotation with Slerp
         float _rotationSpeed = 10f;
         if (!_isJumping) //if player not jumping, rotate normally
         {
-            transform.forward = Vector3.Slerp(transform.forward, inputDirection, Time.deltaTime * _rotationSpeed);
+            transform.forward = Vector3.Slerp(transform.forward, _moveDir, Time.deltaTime * _rotationSpeed);
         }
         else // if player is jumping, don't rotate on y-Axis, or player will land on tail
         {
-            //Vector3 inputDirectionNoY = new Vector3(inputDirection.x,0,inputDirection.z);
-            transform.forward = Vector3.Slerp(transform.forward, new Vector3(inputDirection.x, 0,inputDirection.z), Time.deltaTime * _rotationSpeed);
+            transform.forward = Vector3.Slerp(transform.forward, new Vector3(_moveDir.x, 0,_moveDir.z), Time.deltaTime * _rotationSpeed);
         }
     }
 
