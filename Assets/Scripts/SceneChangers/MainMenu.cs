@@ -6,27 +6,23 @@ using UnityEditor;
 
 public class MainMenu : MonoBehaviour
 {
+    // to load scenes from main menu specifically 
     public void PlayGame()
     {
-        SceneManager.LoadScene(1); //Loads Level 1
+        SceneManager.LoadScene(1); //Load Level 1
     }
 
-
-    public void GoToSettingsMenu()
+    public void ToMainMenu()
     {
-        SceneManager.LoadScene("SettingsMenu");
+        SceneManager.LoadScene(0); //Load Level 1
     }
-
-
-    public void GoToMainMenu()
+    public void BackToLevel5()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(5); //Load Level 1
     }
-
-
     public void QuitGame()
     {
-        Debug.Log("Game quits when built");
+        Debug.Log("Game quits when it's built");
         Application.Quit();
 
     }

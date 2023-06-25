@@ -12,16 +12,16 @@ public class SitBehaviour : StateMachineBehaviour
     [SerializeField]
     private int _numberOfSitAnimations;
     // keep track if character is sitting
-    private bool _isSitting;
+    private bool _isSitting = false;
     // look into how long the character is idle
     private float _sittingTime;
     // field to store animation where we want to transition to
     private int _sitAnimation;
 
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
         ResetSit(); //always reset first when we enter this state
     }
 
@@ -65,6 +65,7 @@ public class SitBehaviour : StateMachineBehaviour
         if (_isSitting)
         {  // go back to nearest default animation
             _sitAnimation--;
+            return;
         }
         _isSitting = false;
         _sittingTime = 0;

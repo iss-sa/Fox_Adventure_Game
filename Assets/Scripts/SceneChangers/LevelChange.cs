@@ -6,21 +6,25 @@ using UnityEngine.SceneManagement;
 public class LevelChange : MonoBehaviour
 {
     [SerializeField]
+    private UIInventory _uiInventory;
+
+    [SerializeField]
     private Inventory _inventory;
 
     [SerializeField]
     private Animator _transition;
     private float _transitionTime = 1f;
 
-    // --- variables to count how often an item is in the inventory of the player
-    private int _food = 0;
-    private int _rocks = 0;
-    private int _branches = 0;
-    private int _leaves = 0;
-    // ---
+    // to figure out if all items have been found
+    private int _slot = 0;
+    private void Start()
+    {
+        _uiInventory = FindObjectOfType<UIInventory>();
+    }
+
 
     // if player collides with the LevelChanger Object, it is checked if required Items are in inventory 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {   
         if (other.CompareTag("Player"))
         {
@@ -66,15 +70,10 @@ public class LevelChange : MonoBehaviour
             // to finish level4: Branch, Leaves, Rock, Food needed for a camping place
             if (SceneManager.GetActiveScene().buildIndex == 4)
             {
-                // go through inventory (public List<Item> characterItems = new List<Item>();) and 
-                // if food / rock / branch / leaves found:  add 1 to respective variable
-                    // if(_inventory.FindItemInInventory(1) == "Branch") {_branches += 1} 
-                    // if(_inventory.FindItemInInventory(2) == "Leaves") {_leaves += 1} 
-                    // if(_inventory.FindItemInInventory(3) == "Rock") {_rocks += 1} 
-                    // if(_inventory.FindItemInInventory(4) == "Food") {_food += 1} 
-                
+                _slot = _uiInventory.FirstUnusedSlot();
 
-                if(_food == 2 && _rocks == 5 && _branches == 6 && _leaves == 4)
+                // if first 10 slots occupied, all items were found
+                if(_slot == 10) 
                 {
                     LoadNextLevel();
                 }
@@ -82,6 +81,12 @@ public class LevelChange : MonoBehaviour
                 {
                     Debug.Log("You are still missing some items to be able to build an awesome camp");
                 }
+            }
+
+            // to get from level 5 to the end screen -> press enter
+            if (SceneManager.GetActiveScene().buildIndex == 5 && Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene(6);
             }
         }
     } 
@@ -95,7 +100,7 @@ public class LevelChange : MonoBehaviour
 
     IEnumerator LoadLevel(int levelIndex)
     {
-        // Play animation
+        // Play crossfade animation
         _transition.SetTrigger("Start");
         // Wait until animation over
         yield return new WaitForSeconds(_transitionTime);

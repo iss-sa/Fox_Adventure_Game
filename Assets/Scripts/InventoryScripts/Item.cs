@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Item
-{
+{ 
+    // Item class so each item has following properties:
     public int id;
     public string title;
     public string description;

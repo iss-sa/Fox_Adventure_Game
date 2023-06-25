@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    Animator _animator;
+    private Animator _animator;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _animator = GetComponent<Animator>(); // get object at start
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        //bool _walkingKeysPressed = (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
         // WALKING ANIMATION        
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) )
         {

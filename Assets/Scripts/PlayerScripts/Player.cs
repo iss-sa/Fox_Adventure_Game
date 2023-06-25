@@ -9,27 +9,24 @@ public class Player : MonoBehaviour
     private float _moveSpeed; 
     private float _runSpeed = 10f;
     private float _walkSpeed = 3f;
-    private float _jumpingSpeed = 3f;
+    private float _jumpingSpeed = 3.5f;
     private int _maxJumps = 2; // only double jumps possible, not triple
     private int _jumpsRemaining; 
     private bool _isJumping = false;
-    //private Vector3 inputVector = new Vector3(0,0,0); //movement direction through inputs
+    
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // define move speed by checking if shift is being pressed (shift pressed = _runSpeed)
         _moveSpeed = Input.GetKey(KeyCode.LeftShift) ? _runSpeed : _walkSpeed;
 
-        MovementPlayer();
-
-
-        if (Input.GetMouseButtonDown(0)) //right click on mouse
-        {}
+        MovementPlayer(); // move player
     }
 
     private void MovementPlayer()
     {
+        // WALKING
         // Player Input - forward/back and left/right 
         float _horizontalInput = Input.GetAxis("Horizontal");
         float _verticalInput = Input.GetAxis("Vertical");
@@ -49,9 +46,10 @@ public class Player : MonoBehaviour
         
         // Camera-Relative Movement of Player
         Vector3 _moveDir = _forwardRelativeVerticalInput + _rightRelativeVerticalInput;
-
-
-        Vector3 inputDirection = new Vector3(0,0,0); //movement direction through inputs (only jumping)
+        
+        // JUMPING
+        //movement direction for jumping
+        Vector3 _jumpVectorDir = new Vector3(0,0,0);
         // Jump and double jump
         if(Input.GetKeyDown("space"))
         {
@@ -61,25 +59,25 @@ public class Player : MonoBehaviour
                 if(!_isJumping) // if you are not currently jumping
                 {
                     // jump, and _isJumping set to true
-                    inputDirection.y = +_jumpingSpeed;
-                    RB.velocity += inputDirection;
+                    _jumpVectorDir.y = +_jumpingSpeed;
+                    RB.velocity += _jumpVectorDir;
                     _isJumping = true;
                 }
                 else
                 {
                     // you are currently jumping and jump again, _jumpsRemaining is reduced once
-                    inputDirection.y = +_jumpingSpeed;
-                    RB.velocity += inputDirection;
+                    _jumpVectorDir.y = +_jumpingSpeed;
+                    RB.velocity += _jumpVectorDir;
                     _jumpsRemaining--;
                 }
             }
         }
 
-        // normalize, so that diagonal movement not faster
-        inputDirection = inputDirection.normalized;
-        _moveDir.y = inputDirection.y;
+        // normalize, so that diagonal movement not faster, set y of moveDir to y of jumpVectorDir
+        _jumpVectorDir = _jumpVectorDir.normalized;
+        _moveDir.y = _jumpVectorDir.y;
 
-        // apply movement
+        // APPLY MOVEMENT
         transform.position += _moveDir * _moveSpeed * Time.deltaTime;
 
         // ROTATION of player -> smoothness of rotation with Slerp

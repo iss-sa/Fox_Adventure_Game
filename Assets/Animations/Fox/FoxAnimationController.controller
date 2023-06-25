@@ -10,14 +10,6 @@ BlendTree:
   m_Childs:
   - serializedVersion: 2
     m_Motion: {fileID: 1827226128182048838, guid: a2e546d7d9c06c5438e2982ef4737ce3, type: 3}
-    m_Threshold: 0
-    m_Position: {x: 0, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: Sit
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: a2e546d7d9c06c5438e2982ef4737ce3, type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -25,7 +17,7 @@ BlendTree:
     m_DirectBlendParameter: Sit
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: d606362d2cd19554aaf474b16d557924, type: 3}
+    m_Motion: {fileID: 1827226128182048838, guid: a2e546d7d9c06c5438e2982ef4737ce3, type: 3}
     m_Threshold: 2
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -33,7 +25,7 @@ BlendTree:
     m_DirectBlendParameter: Sit
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: a2e546d7d9c06c5438e2982ef4737ce3, type: 3}
+    m_Motion: {fileID: 1827226128182048838, guid: d606362d2cd19554aaf474b16d557924, type: 3}
     m_Threshold: 3
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -41,7 +33,7 @@ BlendTree:
     m_DirectBlendParameter: Sit
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: e73c2dbc3de029f41bbdd4fd33d9fef8, type: 3}
+    m_Motion: {fileID: 1827226128182048838, guid: a2e546d7d9c06c5438e2982ef4737ce3, type: 3}
     m_Threshold: 4
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -49,8 +41,16 @@ BlendTree:
     m_DirectBlendParameter: Sit
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: 13236cf41befc77498c6245c317911ae, type: 3}
+    m_Motion: {fileID: 1827226128182048838, guid: e73c2dbc3de029f41bbdd4fd33d9fef8, type: 3}
     m_Threshold: 5
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Sit
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 1827226128182048838, guid: 13236cf41befc77498c6245c317911ae, type: 3}
+    m_Threshold: 6
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -58,8 +58,8 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: Sit
   m_BlendParameterY: Blend
-  m_MinThreshold: 0
-  m_MaxThreshold: 5
+  m_MinThreshold: 1
+  m_MaxThreshold: 6
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -301,25 +301,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isJumping
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isRunning
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Sit
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeUntilSit: 5
-  _numberOfSitAnimations: 5
+  _numberOfSitAnimations: 6
 --- !u!1102 &2949828123028979310
 AnimatorState:
   serializedVersion: 6

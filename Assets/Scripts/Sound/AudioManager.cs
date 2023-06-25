@@ -7,13 +7,14 @@ using UnityEditor;
 
 public class AudioManager : MonoBehaviour
 {
+    // From Sound class
     public Sound[] sounds;
 
-    private bool _isPlaying = true;
-
+    // get instance if Audio Manager
     public static AudioManager instance;
     void Awake()
     {
+        // if there are two Audio Managers, destroy one, keep other (only one needed)
         if (instance == null)
         {
             instance = this;
@@ -24,8 +25,10 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        // keep current audio manager throughout all scenes
         DontDestroyOnLoad(gameObject);
         
+        // instantiate 
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -37,14 +40,19 @@ public class AudioManager : MonoBehaviour
         
     }
 
+    // to play background sound constantly
     void Start()
     {
         Play("backgroundSound");
     }
 
+    // Play function, so that a sound can be played in another class
     public void Play(string name) 
     {
+        // find sound in list with name given
         Sound s = Array.Find(sounds, sound => sound.name == name);
+
+        // if exists, play sound, if not send message
         if (s != null)
         {
             s.source.Play();
@@ -53,8 +61,9 @@ public class AudioManager : MonoBehaviour
         {
             Debug.Log(name + " not found (check also in gameObject AudioManager name)");
         }
-    } // FindObjectOfType<AudioManager>().Play("nameofAudioFile")
+    } // FindObjectOfType<AudioManager>().Play("nameofAudioFile");
     
+    // same logic as Play(), only for pausing sound
     public void Pause(string nameofAudioFile)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -66,5 +75,5 @@ public class AudioManager : MonoBehaviour
         {
             Debug.Log(name + " not found (check also in gameObject AudioManager name)");
         }
-    } // FindObjectOfType<AudioManager>().Play("nameofAudioFile")
+    } // FindObjectOfType<AudioManager>().Play("nameofAudioFile");
 }

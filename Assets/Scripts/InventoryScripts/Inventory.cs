@@ -9,15 +9,16 @@ public class Inventory : MonoBehaviour
     public ItemDatabase itemDatabase; // reference to database to drag and drop from inspector
     public UIInventory inventoryUI; //grab reference to UI Inventory for methods
 
-    //private bool _itemCollision = false; // true if player collided with an item
-
     private void Start()
     {
+        // Instantiate Inventory 
         inventoryUI.gameObject.SetActive(!inventoryUI.gameObject.activeSelf);
     }
-    // to toggle inventory or call it
+
+    
     private void Update()
     {
+        // to toggle inventory or call it
         if (Input.GetKeyDown(KeyCode.I))
         {
             inventoryUI.gameObject.SetActive(!inventoryUI.gameObject.activeSelf);
@@ -30,15 +31,17 @@ public class Inventory : MonoBehaviour
         Item itemToAdd = itemDatabase.GetItem(id);
         characterItems.Add(itemToAdd);
         inventoryUI.AddNewItem(itemToAdd); //using UI Inventory method
+        FindObjectOfType<AudioManager>().Play("PickUpItem");  // play sound
         Debug.Log("Added item: " + itemToAdd.title);
     }
+
     //give player an item   
     public void GiveItem(string itemName)
     {
         Item itemToAdd = itemDatabase.GetItem(itemName);
         characterItems.Add(itemToAdd);
         inventoryUI.AddNewItem(itemToAdd); //using UI Inventory method
-        FindObjectOfType<AudioManager>().Play("PickUpItem");
+        //FindObjectOfType<AudioManager>().Play("PickUpItem"); // play sound
         Debug.Log("Added item: " + itemToAdd.title);
     }
 
@@ -77,7 +80,6 @@ public class Inventory : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         // Check if the collider belongs to the item being collected -> can only be picked up if key 'E' pressed
-
         if (other.CompareTag("Rock") && Input.GetKeyDown(KeyCode.E)) // Rock item found -> add to inventory
         {
             GiveItem("Rock");

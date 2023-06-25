@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class FollowMousePosition : MonoBehaviour
 {
-    
-    //Canvas Image: Follow mouse if Selected
+    //Canvas Image: Follow mouse if Item selected
     void Update()
     {
         transform.position = Input.mousePosition;

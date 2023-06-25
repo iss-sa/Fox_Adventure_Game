@@ -37,5 +37,10 @@ public class UIInventory : MonoBehaviour
         UpdateSlot(uIItems.FindIndex(i => i.item == item), null);
     }
     
+    public int FirstUnusedSlot()
+    {
+        Debug.Log(uIItems.FindIndex(i => i.item == null));
+        return uIItems.FindIndex(i => i.item == null);
+    }
 
 }
