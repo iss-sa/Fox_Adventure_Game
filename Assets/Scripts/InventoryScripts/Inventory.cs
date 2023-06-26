@@ -41,7 +41,7 @@ public class Inventory : MonoBehaviour
         Item itemToAdd = itemDatabase.GetItem(itemName);
         characterItems.Add(itemToAdd);
         inventoryUI.AddNewItem(itemToAdd); //using UI Inventory method
-        //FindObjectOfType<AudioManager>().Play("PickUpItem"); // play sound
+        FindObjectOfType<AudioManager>().Play("PickUpItem"); // play sound
         Debug.Log("Added item: " + itemToAdd.title);
     }
 
