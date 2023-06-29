@@ -454,6 +454,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ffb26c203fe2344972006122fcc86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showText: {fileID: 3208679274440425082}
+  _uiInventory: {fileID: 0}
   _inventory: {fileID: 0}
   _transition: {fileID: 581308062119449365}
 --- !u!114 &3208679274440425082
@@ -476,4 +478,4 @@ MonoBehaviour:
     y: 0
     width: 200
     height: 100
-  _customSkin: {fileID: 11400000, guid: 96f314ae854631049854376ee646af81, type: 2}
+  _customSkin: {fileID: 11400000, guid: d3e70a2e54aefe94c808add17d1b0ac4, type: 2}

@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class LevelChange : MonoBehaviour
 {
     [SerializeField]
+    private ShowText _showText;
+
+    [SerializeField]
     private UIInventory _uiInventory;
 
     [SerializeField]
@@ -73,7 +76,7 @@ public class LevelChange : MonoBehaviour
                 _slot = _uiInventory.FirstUnusedSlot();
 
                 // if first 10 slots occupied, all items were found
-                if(_slot == 10) 
+                if(_slot >= 10) 
                 {
                     LoadNextLevel();
                 }
@@ -94,6 +97,9 @@ public class LevelChange : MonoBehaviour
     // load level and trigger animations for 
     private void LoadNextLevel()
         {
+            // get rid of text
+            _showText._text = "";
+            
             // load scene
             StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
         }

@@ -10,7 +10,7 @@ public class ShowText : MonoBehaviour
 
 	[Header("The text to Display on Trigger")]
     [SerializeField]
-	private string _text = "Text"; // text to be shown
+	public string _text = "Text"; // text to be shown
 
 	[SerializeField]
 	private Rect _boxSize = new Rect( 0, 0, 200, 100); // box size in which text is shown

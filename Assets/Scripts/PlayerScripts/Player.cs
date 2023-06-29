@@ -23,9 +23,19 @@ public class Player : MonoBehaviour
 
         MovementPlayer(); // move player
     }
+    
+    private void BarkingFox()
+    {
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            FindObjectOfType<AudioManager>().Play("FoxBark");
+        }
 
+    }
     private void MovementPlayer()
     {
+        BarkingFox();
+
         // WALKING
         // Player Input - forward/back and left/right 
         float _horizontalInput = Input.GetAxis("Horizontal");

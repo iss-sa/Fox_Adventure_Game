@@ -15,6 +15,16 @@ public class AnimationController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        // BRAKING ANIMATION
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            _animator.SetBool("isBarking", true);
+        }
+        else
+        {
+            _animator.SetBool("isBarking", false);
+        }
+
         // WALKING ANIMATION        
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) )
         {
@@ -37,6 +47,7 @@ public class AnimationController : MonoBehaviour
             _animator.SetBool("isRunning", false); // running bool automatically false, if player not walking
         }
 
+        // JUMPING ANIMATION
         if(Input.GetKeyDown("space")) // if space is pressed, jump animation triggered (boolean set to true)
         {
             _animator.SetBool("isJumping", true);

@@ -75,5 +75,5 @@ public class AudioManager : MonoBehaviour
         {
             Debug.Log(name + " not found (check also in gameObject AudioManager name)");
         }
-    } // FindObjectOfType<AudioManager>().Play("nameofAudioFile");
+    } // FindObjectOfType<AudioManager>().Pause("nameofAudioFile");
 }

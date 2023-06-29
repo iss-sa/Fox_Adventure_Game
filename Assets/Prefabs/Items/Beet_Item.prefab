@@ -119,4 +119,4 @@ MonoBehaviour:
     y: 0
     width: 200
     height: 100
-  _customSkin: {fileID: 11400000, guid: 96f314ae854631049854376ee646af81, type: 2}
+  _customSkin: {fileID: 11400000, guid: 4ec730a8573af1946ad1c5ae2b3d994f, type: 2}
