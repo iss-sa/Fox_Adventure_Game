@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Player : MonoBehaviour
 {
@@ -13,14 +14,19 @@ public class Player : MonoBehaviour
     private int _maxJumps = 2; // only double jumps possible, not triple
     private int _jumpsRemaining; 
     private bool _isJumping = false;
-    
+
+    // to switch cameras
+    [SerializeField] private CinemachineFreeLook _thirdPersonCam;
+    [SerializeField] private CinemachineVirtualCamera _firstPersonCam;
+    private string _activeCamera = "thirdPerson";
+
 
     // Update is called once per frame
     private void Update()
     {
         // define move speed by checking if shift is being pressed (shift pressed = _runSpeed)
         _moveSpeed = Input.GetKey(KeyCode.LeftShift) ? _runSpeed : _walkSpeed;
-
+        CameraSwitch();
         MovementPlayer(); // move player
     }
     
@@ -30,7 +36,6 @@ public class Player : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().Play("FoxBark");
         }
-
     }
     private void MovementPlayer()
     {
@@ -91,7 +96,9 @@ public class Player : MonoBehaviour
         transform.position += _moveDir * _moveSpeed * Time.deltaTime;
 
         // ROTATION of player -> smoothness of rotation with Slerp
-        float _rotationSpeed = 10f;
+        float _rotationSpeed = 10f; 
+
+        // differentiate whether player jumping or not
         if (!_isJumping) //if player not jumping, rotate normally
         {
             transform.forward = Vector3.Slerp(transform.forward, _moveDir, Time.deltaTime * _rotationSpeed);
@@ -99,6 +106,27 @@ public class Player : MonoBehaviour
         else // if player is jumping, don't rotate on y-Axis, or player will land on tail
         {
             transform.forward = Vector3.Slerp(transform.forward, new Vector3(_moveDir.x, 0,_moveDir.z), Time.deltaTime * _rotationSpeed);
+        }
+    }
+
+    // CAMERA SWITCH
+    private void CameraSwitch()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (_activeCamera == "firstPerson")
+            {
+                _thirdPersonCam.Priority = 10;
+                _firstPersonCam.Priority = 0;
+                _activeCamera = "thirdPerson";
+            }
+
+            else if(_activeCamera == "thirdPerson")
+            {
+                _thirdPersonCam.Priority = 0;
+                _firstPersonCam.Priority = 10;
+                _activeCamera = "firstPerson";
+            }
         }
     }
 
