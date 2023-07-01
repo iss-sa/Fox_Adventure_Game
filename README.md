@@ -13,18 +13,21 @@ On your way you have to overcome obstacles and have to collect items, otherwise 
 ## Features of Our Game
 
 Main Menu
+
     - Play Button: start the game
     - Settings Button: turn audio on/off 
         - with Back Button to go back to the main menu
     - Quit Button: Quits the game when it is built
 
 Music
+
     - continuous background sound 
     - item pickup sound
     - barking sound
     - audio manager attached to main menu
 
-Player can
+Player can:
+
     - walk at normal pace
     - run
     - jump
@@ -40,6 +43,7 @@ Player can
     - bark (with animation)
 
 Camera
+
     - cinemachine camera --> cannot go through objects with collider
     - FreeLook Camera (3rd Person - keeps player in focus)
     - Virtual Camera (1st Person Camera)
@@ -47,6 +51,7 @@ Camera
     - Player can switch between 1st and 3rd Person camera
 
 In the Game
+
     - Scene Changer
         - text when changing scenes
         - only possible to change mountain levels/scenes when you achieved the requirements
@@ -81,6 +86,7 @@ Assets: imported and own
         - ground texture for terrain
     
 Game End
+
     - (main menu) end scene
     - "BackToLastScene" Button --> brings you back into the game to the end
     - "MainMenu" Button --> back to main menu/beginning
