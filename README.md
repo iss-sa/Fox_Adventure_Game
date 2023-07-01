@@ -55,8 +55,8 @@ In the Game
     - Beginning intructions when entering the game
     - text when you pick up items
 
-Assets
-    - imported and own
+Assets: imported and own
+    
     - own created 
         - background landscape with unity terrain
         - mountain
